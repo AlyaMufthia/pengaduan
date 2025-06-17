@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAT Examination</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f8f9fa;
+        }
+        
+        .header {
+            background-color: #3f51b5;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        
+        .countdown {
+            background-color: #f44336;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        
+        .info-btn {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .tab-content {
+            padding: 20px;
+            background-color: white;
+            border-left: 1px solid #dee2e6;
+            border-right: 1px solid #dee2e6;
+            border-bottom: 1px solid #dee2e6;
+            border-radius: 0 0 5px 5px;
+        }
+        
+        .nav-tabs .nav-link {
+            border: 1px solid transparent;
+            border-bottom: none;
+            border-radius: 5px 5px 0 0;
+            padding: 12px 20px;
+            color: #495057;
+            font-weight: 500;
+        }
+        
+        .nav-tabs .nav-link.active {
+            background-color: white;
+            border-color: #dee2e6 #dee2e6 transparent;
+            color: #3f51b5;
+        }
+        
+        .story-container {
+            height: calc(100vh - 250px);
+            overflow-y: auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .question-container {
+            height: calc(100vh - 250px);
+            overflow-y: auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .question {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .question:last-child {
+            border-bottom: none;
+        }
+        
+        .question-number {
+            font-weight: bold;
+            color: #3f51b5;
+            margin-bottom: 10px;
+        }
+        
+        .footer {
+            background-color: #3f51b5;
+            color: white;
+            padding: 15px 0;
+        }
+        
+        .question-nav .btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin: 0 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .question-nav .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+        
+        .question-nav .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+        
+        .question-nav .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+        
+        .form-check-input:checked {
+            background-color: #3f51b5;
+            border-color: #3f51b5;
+        }
+        
+        @media (max-width: 768px) {
+            .story-container, .question-container {
+                height: auto;
+                max-height: 300px;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header py-3">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="logo">
+                    <i class="fas fa-cat me-2"></i>CAT Examination
+                </div>
+                <div class="d-flex align-items-center">
+                    <div class="me-4">
+                        <i class="fas fa-user-graduate me-2"></i>
+                        <span>John Doe</span>
+                    </div>
+                    <div class="countdown me-4" id="countdown">
+                        <i class="fas fa-clock me-1"></i>
+                        <span>01:30:00</span>
+                    </div>
+                    <button class="btn btn-light info-btn" data-bs-toggle="modal" data-bs-target="#infoModal">
+                        <i class="fas fa-info"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container my-4 flex-grow-1">
+        <!-- Tabs Navigation -->
+        <ul class="nav nav-tabs" id="examTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="part1-tab" data-bs-toggle="tab" data-bs-target="#part1" type="button" role="tab">Part 1</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="part2-tab" data-bs-toggle="tab" data-bs-target="#part2" type="button" role="tab">Part 2</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="part3-tab" data-bs-toggle="tab" data-bs-target="#part3" type="button" role="tab">Part 3</button>
+            </li>
+        </ul>
+
+        <!-- Tab Content -->
+        <div class="tab-content" id="examTabsContent">
+            <div class="tab-pane fade show active" id="part1" role="tabpanel">
+                <div class="row mt-3">
+                    <!-- Story/Reading Passage -->
+                    <div class="col-md-5">
+                        <div class="story-container">
+                            <h4 class="mb-4"><i class="fas fa-book-open me-2"></i>Reading Passage</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl. Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl. Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl. Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl. Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Questions -->
+                    <div class="col-md-7">
+                        <div class="question-container">
+                            <!-- Question 1 -->
+                            <div class="question">
+                                <div class="question-number">Question 1</div>
+                                <p>What is the main idea of the passage?</p>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="radio" name="q1" id="q1a">
+                                    <label class="form-check-label" for="q1a">
+                                        Option A
+                                    </label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="radio" name="q1" id="q1b">
+                                    <label class="form-check-label" for="q1b">
+                                        Option B
+                                    </label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="radio" name="q1" id="q1c">
+                                    <label class="form-check-label" for="q1c">
+                                        Option C
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="q1" id="q1d">
+                                    <label class="form-check-label" for="q1d">
+                                        Option D
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <!-- Question 2 -->
+                            <div class="question">
+                                <div class="question-number">Question 2</div>
+                                <p>What can be inferred from the second paragraph?</p>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="radio" name="q2" id="q2a">
+                                    <label class="form-check-label" for="q2a">
+                                        Option A
+                                    </label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="radio" name="q2" id="q2b">
+                                    <label class="form-check-label" for="q2b">
+                                        Option B
+                                    </label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="radio" name="q2" id="q2c">
+                                    <label class="form-check-label" for="q2c">
+                                        Option C
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="q2" id="q2d">
+                                    <label class="form-check-label" for="q2d">
+                                        Option D
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <!-- More questions would follow the same pattern -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-pane fade" id="part2" role="tabpanel">
+                <div class="row mt-3">
+                    <!-- Story/Reading Passage for Part 2 -->
+                    <div class="col-md-5">
+                        <div class="story-container">
+                            <h4 class="mb-4"><i class="fas fa-book-open me-2"></i>Reading Passage - Part 2</h4>
+                            <p>Part 2 reading content goes here...</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Questions for Part 2 -->
+                    <div class="col-md-7">
+                        <div class="question-container">
+                            <!-- Question 16 -->
+                            <div class="question">
+                                <div class="question-number">Question 16</div>
+                                <p>Part 2 Question 1 text here...</p>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="radio" name="q16" id="q16a">
+                                    <label class="form-check-label" for="q16a">
+                                        Option A
+                                    </label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="radio" name="q16" id="q16b">
+                                    <label class="form-check-label" for="q16b">
+                                        Option B
+                                    </label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="radio" name="q16" id="q16c">
+                                    <label class="form-check-label" for="q16c">
+                                        Option C
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="q16" id="q16d">
+                                    <label class="form-check-label" for="q16d">
+                                        Option D
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <!-- More questions would follow the same pattern -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-pane fade" id="part3" role="tabpanel">
+                <div class="row mt-3">
+                    <!-- Story/Reading Passage for Part 3 -->
+                    <div class="col-md-5">
+                        <div class="story-container">
+                            <h4 class="mb-4"><i class="fas fa-book-open me-2"></i>Reading Passage - Part 3</h4>
+                            <p>Part 3 reading content goes here...</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Questions for Part 3 -->
+                    <div class="col-md-7">
+                        <div class="question-container">
+                            <!-- Question 31 -->
+                            <div class="question">
+                                <div class="question-number">Question 31</div>
+                                <p>Part 3 Question 1 text here...</p>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="radio" name="q31" id="q31a">
+                                    <label class="form-check-label" for="q31a">
+                                        Option A
+                                    </label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="radio" name="q31" id="q31b">
+                                    <label class="form-check-label" for="q31b">
+                                        Option B
+                                    </label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="radio" name="q31" id="q31c">
+                                    <label class="form-check-label" for="q31c">
+                                        Option C
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="q31" id="q31d">
+                                    <label class="form-check-label" for="q31d">
+                                        Option D
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <!-- More questions would follow the same pattern -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer with Question Navigation -->
+    <footer class="footer">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="question-nav">
+                    <button class="btn btn-danger">1</button>
+                    <button class="btn btn-secondary">2</button>
+                    <button class="btn btn-secondary">3</button>
+                    <button class="btn btn-secondary">4</button>
+                    <button class="btn btn-secondary">5</button>
+                    <button class="btn btn-secondary">6</button>
+                    <button class="btn btn-secondary">7</button>
+                    <button class="btn btn-secondary">8</button>
+                    <button class="btn btn-secondary">9</button>
+                    <button class="btn btn-secondary">10</button>
+                    <button class="btn btn-secondary">11</button>
+                    <button class="btn btn-secondary">12</button>
+                    <button class="btn btn-secondary">13</button>
+                    <button class="btn btn-secondary">14</button>
+                    <button class="btn btn-success">15</button>
+                </div>
+                <div>
+                    <button class="btn btn-light me-2">
+                        <i class="fas fa-arrow-left me-1"></i> Previous
+                    </button>
+                    <button class="btn btn-light">
+                        Next <i class="fas fa-arrow-right ms-1"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Info Modal -->
+    <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="infoModalLabel">Exam Information</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Exam:</strong> CAT Examination</p>
+                    <p><strong>Student:</strong> John Doe</p>
+                    <p><strong>Duration:</strong> 1 hour 30 minutes</p>
+                    <p><strong>Total Questions:</strong> 45 (15 per part)</p>
+                    <hr>
+                    <p>You can navigate between questions using the buttons at the bottom of the screen.</p>
+                    <p>Answered questions are marked in green, current question in red.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Countdown timer
+        function updateCountdown() {
+            const countdownElement = document.querySelector('#countdown span');
+            let time = countdownElement.textContent.split(':');
+            let hours = parseInt(time[0]);
+            let minutes = parseInt(time[1]);
+            let seconds = parseInt(time[2]);
+            
+            if (seconds > 0) {
+                seconds--;
+            } else {
+                if (minutes > 0) {
+                    minutes--;
+                    seconds = 59;
+                } else {
+                    if (hours > 0) {
+                        hours--;
+                        minutes = 59;
+                        seconds = 59;
+                    } else {
+                        // Time's up!
+                        clearInterval(timer);
+                        alert("Time's up! The exam will now submit.");
+                        return;
+                    }
+                }
+            }
+            
+            countdownElement.textContent = 
+                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        const timer = setInterval(updateCountdown, 1000);
+        
+        // Mark questions as answered when an option is selected
+        document.querySelectorAll('.form-check-input').forEach(input => {
+            input.addEventListener('change', function() {
+                const questionNumber = this.name.substring(1);
+                const questionBtn = document.querySelector(`.question-nav .btn:nth-child(${questionNumber})`);
+                if (questionBtn && !questionBtn.classList.contains('btn-danger')) {
+                    questionBtn.classList.remove('btn-secondary');
+                    questionBtn.classList.add('btn-success');
+                }
+            });
+        });
+        
+        // Question navigation buttons
+        document.querySelectorAll('.question-nav .btn').forEach(btn => {
+            if (!btn.classList.contains('btn-danger') && !btn.classList.contains('btn-success')) {
+                btn.addEventListener('click', function() {
+                    document.querySelector('.question-nav .btn-danger').classList.remove('btn-danger');
+                    document.querySelector('.question-nav .btn-danger').classList.add('btn-secondary');
+                    this.classList.remove('btn-secondary');
+                    this.classList.add('btn-danger');
+                    // Here you would scroll to the corresponding question
+                });
+            }
+        });
+    </script>
+</body>
+</html>
