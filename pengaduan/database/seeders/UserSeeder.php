@@ -23,9 +23,9 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => 'qiaraa',
-            'email'=>'qiara12@gmail.com',
-            'password'=> bcrypt('qiara12'),
+            'name' => 'admin',
+            'email'=>'admin@aduin-saja.mdn',
+            'password'=> bcrypt('admin123'),
             'no_hp'=>'081234654',
             'alamat'=>'jln.amplas12',
             'role'=>'admin'

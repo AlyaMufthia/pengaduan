@@ -14,18 +14,14 @@ class KategoriPengaduanSeeder extends Seeder
     public function run(): void
     {
         KategoriPengaduan::create([
-            "nama" => 'Infrastruktur'
+            "nama" => 'Pembunuhan'
         ]);
 
         KategoriPengaduan::create([
-            "nama" => 'Lingkungan'
+            "nama" => 'Pembegalan'
         ]);
          KategoriPengaduan::create([
-            "nama" => 'Pelayanan Publik'
-        ]);
-
-        KategoriPengaduan::create([
-            "nama" => 'Keamanan'
+            "nama" => 'Pencurian'
         ]);
 
         KategoriPengaduan::create([
