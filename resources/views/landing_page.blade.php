@@ -222,7 +222,7 @@
                 class="md:w-1/2 bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center p-8"
               >
                 <img
-                  src="https://cdn-icons-png.flaticon.com/512/2991/2991473.png"
+                  src="{{asset('logo.png')}}"
                   alt="Complaint Illustration"
                   class="w-64 h-64 object-contain"
                 />
@@ -1055,7 +1055,7 @@
                 <li class="flex items-center">
                   <i class="fas fa-map-marker-alt mr-2 text-yellow-300"></i>
                   <span class="text-blue-100"
-                    >Jl. Contoh No. 123, Kota Contoh</span
+                    >Jl. Jamin Ginting No. 123, Kota Medan</span
                   >
                 </li>
                 <li class="flex items-center">
@@ -1102,7 +1102,7 @@
             class="border-t border-blue-500 mt-8 pt-6 text-center text-blue-100"
           >
             <p>
-              &copy; 2023 ADUIN SAJA.MDN - Layanan Pengaduan Masyarakat. Semua
+              &copy; 2025 ADUIN SAJA.MDN - Layanan Pengaduan Masyarakat. Semua
               hak dilindungi.
             </p>
           </div>
